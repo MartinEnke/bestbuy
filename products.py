@@ -3,21 +3,23 @@ class Product:
     def __init__(self, name: str, price: float, quantity: int):
         """
         Initializes a new product with the specified name, price, and quantity.
+        Automatically deactivates the product if initialized with quantity 0.
         """
         if not name or price < 0 or quantity < 0:
             raise ValueError(
-                "Invalid product details: name cannot be empty, price and quantity must be non-negative.")
+                "Invalid product details: name cannot be empty, price and quantity must be non-negative."
+            )
 
         self.name = name
         self.price = price
         self.quantity = quantity
-        self.active = True
+        self.active = quantity > 0
 
     def get_quantity(self) -> int:
-        """
-        Returns the current quantity of the product in stock.
-        """
-        return self.quantity
+            """
+            Returns the current quantity of the product in stock.
+            """
+            return self.quantity
 
     def set_quantity(self, quantity: int):
         """
@@ -28,6 +30,7 @@ class Product:
         self.quantity = quantity
         if self.quantity == 0:
             self.deactivate()
+
 
     def is_active(self) -> bool:
         """
